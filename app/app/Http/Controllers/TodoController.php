@@ -4,17 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Todo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class TodoController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    
-    //
     public function index(){
-        $todo_list = Todo::all();
+        $todo_list = Todo::where('user_id', Auth::id())->get();
 
         return view('todo.index', [
         'todo_list' => $todo_list ]);
