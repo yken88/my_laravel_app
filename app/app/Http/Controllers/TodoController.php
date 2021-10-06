@@ -15,4 +15,12 @@ class TodoController extends Controller
         return view('todo.index', [
         'todo_list' => $todo_list ]);
     }
+
+    public function show($id){
+        $todo = Todo::find($id);
+        
+        return view('todo.show', [
+            'todo' => $todo
+        ]);
+    }
 }
