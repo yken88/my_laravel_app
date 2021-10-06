@@ -10,10 +10,11 @@ use Illuminate\Support\Facades\Auth;
 class TodoController extends Controller
 {
     public function index(){
-        $todo_list = Todo::where('user_id', Auth::id())->get();
+        $todo_list = Todo::where('user_id', Auth::id())->get()->toArray();
 
         return view('todo.index', [
-        'todo_list' => $todo_list ]);
+            'todo_list' => $todo_list 
+        ]);
     }
 
     public function show($id){

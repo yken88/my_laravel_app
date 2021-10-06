@@ -5,12 +5,12 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             @foreach ($todo_list as $todo)
-            <a href="{{ route('todo.show', $todo->id)}}">
+            <a href="{{ route('todo.show', $todo['id'])}}">
                 <div class="card">
-                    <div class="card-header">{{ __($todo->title) }}</div>
+                    <div class="card-header">{{ __($todo['title']) }}</div>
 
                     <div class="card-body">
-                        {{ __($todo->detail) }}
+                        {{ __($todo['detail']) }}
                     </div>
                 </div>
             </a>
