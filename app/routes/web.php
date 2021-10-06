@@ -20,7 +20,9 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/todo', [TodoController::class, 'index'])->name('todo.index')->middleware('auth');
-Route::get('/todo/show/{id}', [TodoController::class, 'show'])->name('todo.show')->middleware('auth');
+// middlewareを適用するURLをグループ化
+Route::group(['prefix' => 'todo', 'middleware' => 'auth'], function(){
+    Route::get('/', [TodoController::class, 'index'])->name('todo.index');
+    Route::get('//show/{id}', [TodoController::class, 'show'])->name('todo.show');
+});
