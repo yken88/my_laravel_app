@@ -24,5 +24,7 @@ Auth::routes();
 // middlewareを適用するURLをグループ化
 Route::group(['prefix' => 'todo', 'middleware' => 'auth'], function(){
     Route::get('/', [TodoController::class, 'index'])->name('todo.index');
-    Route::get('//show/{id}', [TodoController::class, 'show'])->name('todo.show');
+    Route::get('/show/{id}', [TodoController::class, 'show'])->name('todo.show');
+    Route::get('/create', [TodoController::class, 'create'])->name('todo.create');
+    Route::post('/create', [TodoController::class, 'store'])->name('todo.store');
 });
