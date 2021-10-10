@@ -19,6 +19,10 @@ class TodoController extends Controller
 
     public function show($id){
         $todo = Todo::find($id);
+
+        if($todo === null){
+            abort(404);
+        }
         
         return view('todo.show', [
             'todo' => $todo
