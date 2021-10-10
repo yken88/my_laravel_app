@@ -1,3 +1,3 @@
-#Todoリスト
-PHPで作成したTodoリストを、Laravelでも作成
+##Todoリスト
+#PHPで作成したTodoリストを、Laravelでも作成
 
