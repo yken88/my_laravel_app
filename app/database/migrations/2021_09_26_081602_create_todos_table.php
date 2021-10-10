@@ -18,7 +18,7 @@ class CreateTodosTable extends Migration
             $table->string('title');
             $table->text('detail');
             $table->tinyInteger('status');
-            $table->date('completed_at');
+            $table->date('completed_at')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 

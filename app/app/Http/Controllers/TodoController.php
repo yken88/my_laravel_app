@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Auth;
 
 class TodoController extends Controller
 {
+
+    const INCOMPLETE = 0;
+
     public function index(){
         $todo_list = Todo::where('user_id', Auth::id())->get()->toArray();
 
@@ -27,5 +30,23 @@ class TodoController extends Controller
         return view('todo.show', [
             'todo' => $todo
         ]);
+    }
+
+    public function create(){
+        return view('todo.create');
+    }
+
+
+    public function store(Request $request){
+        $todo = [
+            'title' => $request->title,
+            'detail' => $request->detail,
+            'status' => self::INCOMPLETE,
+            'user_id' => Auth::id(),
+        ];
+
+        Todo::create($todo);
+
+        return redirect(route('todo.index'));
     }
 }
