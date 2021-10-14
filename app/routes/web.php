@@ -22,7 +22,7 @@ Route::get('/', function () {
 Auth::routes();
 
 // middlewareを適用するURLをグループ化
-Route::group(['prefix' => 'todo', 'middleware' => 'auth'], function(){
+Route::group(['prefix' => 'todo', 'middleware' => ['auth', 'web']], function(){
     Route::get('/', [TodoController::class, 'index'])->name('todo.index');
     Route::get('/show/{id}', [TodoController::class, 'show'])->name('todo.show');
     Route::get('/create', [TodoController::class, 'create'])->name('todo.create');
