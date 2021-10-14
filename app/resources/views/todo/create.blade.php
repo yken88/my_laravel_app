@@ -13,17 +13,27 @@
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('title') }}</label>
-
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="title" value="{{ old('title') }}" required autocomplete="title" autofocus>
+                                <input id="name" type="text" class="form-control" name="title" value="{{ old('title') }}" autocomplete="title" autofocus>
+                                @if($errors->has('title'))
+                                    <div class="error">
+                                        <p class="text-danger">{{ $errors->first('title') }}</p>
+                                    </div>
+                                @endif
                             </div>
+                            
                         </div>
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Detail') }}</label>
                             <div class="col-md-6">
-                                <textarea id="email" type="email" class="form-control" name="detail" value="{{ old('detail') }}" required autocomplete="detail"></textarea>
+                                <textarea id="email" type="email" class="form-control" name="detail" value="{{ old('detail') }}" autocomplete="detail"></textarea>
 
+                                @if($errors->has('detail'))
+                                <div class="error">
+                                    <p class="text-danger">{{ $errors->first('detail') }}</p>
+                                </div>
+                                @endif
                             </div>
                         </div>
 

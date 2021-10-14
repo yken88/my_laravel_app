@@ -8,10 +8,10 @@
                 @foreach ($todo_list as $todo)
                 <a href="{{ route('todo.show', $todo['id'])}}">
                     <div class="card">
-                        <div class="card-header">{{ __($todo['title']) }}</div>
+                        <div class="card-header">{{ ($todo['title']) }}</div>
 
                         <div class="card-body">
-                            {{ __($todo['detail']) }}
+                            {{ ($todo['detail']) }}
                         </div>
                     </div>
                 </a>
