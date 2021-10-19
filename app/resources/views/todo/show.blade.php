@@ -14,7 +14,7 @@
                         <h6 class="card-subtitle mb-2 text-muted">完了</h6>
                     @endif
                     <p class="card-text">{{ $todo->detail }}</p>
-                    <a href="#" class="card-link">編集</a>
+                    <a href="{{ route('todo.edit', $todo->id )}}" class="card-link">編集</a>
                     <a href="#" class="card-link">削除</a>
                 </div>
               </div>

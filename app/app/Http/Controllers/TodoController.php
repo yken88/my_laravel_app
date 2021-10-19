@@ -50,8 +50,34 @@ class TodoController extends Controller
             Todo::create($todo);
             
         }catch(Exception $e){
-            Log::info($e->getMessage());
+            Log::error($e->getMessage());
             return redirect(route('todo.create'));
+        }
+
+        return redirect(route('todo.index'));
+    }
+
+    public function edit($id){
+        $todo = Todo::find($id);
+
+        if($todo === null){
+            abort(404);
+        }
+        
+        return view('todo.edit', [
+            'todo' => $todo
+        ]);
+    }
+
+    public function update(CreatePostRequest $request){
+        try{
+            $todo = Todo::find($request->id);
+            $todo->title = $request->title;
+            $todo->detail = $request->detail;
+            $todo->save();
+        }catch(Exception $e){
+            Log::error($e->getMessage());
+            return redirect(route('todo.edit', $request->id));
         }
 
         return redirect(route('todo.index'));
