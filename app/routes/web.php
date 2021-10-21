@@ -29,4 +29,5 @@ Route::group(['prefix' => 'todo', 'middleware' => ['auth', 'web']], function(){
     Route::post('/create', [TodoController::class, 'store'])->name('todo.store');
     Route::get('/edit/{id}', [TodoController::class, 'edit'])->name('todo.edit');
     Route::post('/edit/{id}', [TodoController::class, 'update'])->name('todo.update');
+    Route::post('/delete/{id}', [TodoController::class, 'delete'])->name('todo.delete');
 });
