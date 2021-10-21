@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CreatePostRequest;
 use Log;
+use Illuminate\Support\Facades\DB;
 
 class TodoController extends Controller
 {
@@ -70,13 +71,19 @@ class TodoController extends Controller
     }
 
     public function update(CreatePostRequest $request){
-        try{
-            $todo = Todo::find($request->id);
-            $todo->title = $request->title;
+        $todo = Todo::find($request->id);
+
+        DB::beginTransaction();
+        try {
+            $todo->title = $request->tile;
             $todo->detail = $request->detail;
             $todo->save();
-        }catch(Exception $e){
+
+            DB::commit();
+        } catch (\Exception $e) {
             Log::error($e->getMessage());
+            DB::rollback();
+
             return redirect(route('todo.edit', $request->id));
         }
 
