@@ -71,11 +71,11 @@ class TodoController extends Controller
     }
 
     public function update(CreatePostRequest $request){
-        $todo = Todo::find($request->id);
 
         DB::beginTransaction();
         try {
-            $todo->title = $request->tile;
+            $todo = Todo::find($request->id);
+            $todo->title = $request->title;
             $todo->detail = $request->detail;
             $todo->save();
 
@@ -86,6 +86,24 @@ class TodoController extends Controller
 
             return redirect(route('todo.edit', $request->id));
         }
+
+        return redirect(route('todo.index'));
+    }
+
+    public function delete(Request $request){
+        DB::beginTransaction();
+
+        try{
+            $todo = Todo::find($request->id);
+            $todo->delete();
+            DB::commit();
+        }catch(\Exception $e){
+            Log::error($e->getMessage());
+            DB::rollback();
+
+            return redirect(route('todo.index'));
+        }
+        
 
         return redirect(route('todo.index'));
     }

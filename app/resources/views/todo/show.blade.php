@@ -15,7 +15,6 @@
                     @endif
                     <p class="card-text">{{ $todo->detail }}</p>
                     <a href="{{ route('todo.edit', $todo->id )}}" class="card-link">編集</a>
-                    <a href="#" class="card-link">削除</a>
                 </div>
               </div>
         </div>
