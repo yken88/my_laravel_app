@@ -11,9 +11,6 @@ use Illuminate\Support\Facades\DB;
 
 class TodoController extends Controller
 {
-
-    const INCOMPLETE = 0;
-
     public function index(){
         $todo_list = Todo::where('user_id', Auth::id())->get()->toArray();
 
@@ -44,7 +41,7 @@ class TodoController extends Controller
             $todo = [
                 'title' => $request->title,
                 'detail' => $request->detail,
-                'status' => self::INCOMPLETE,
+                'status' => Todo::INCOMPLETE,
                 'user_id' => Auth::id(),
             ];
     

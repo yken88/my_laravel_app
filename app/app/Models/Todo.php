@@ -9,6 +9,10 @@ class Todo extends Model
 {
     use HasFactory;
 
+    const INCOMPLETE = 1;
+    const COMPLETED = 0;
+
+
     protected $fillable = [
         'title',
         'detail',

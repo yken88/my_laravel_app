@@ -7,7 +7,12 @@
             <a href="{{ route('todo.create') }}" class="btn btn-primary mb-3">新規作成</a>
                 @foreach ($todo_list as $todo)
                     <div class="card">
-                        <div class="card-header">{{ ($todo['title']) }}</div>
+                        <div class="card-header">
+                            <label>
+                                <input type="checkbox" class="todo-checkbox" data-id="{{ $todo['id'] }}" @if ($todo['status'])checked @endif>
+                            </label>
+                            {{ ($todo['title']) }}
+                        </div>
                         <div class="d-flex flex-row">
                             <div class="card-body">
                                 {{ ($todo['detail']) }}
@@ -29,4 +34,8 @@
         </div>
     </div>
 </div>
+
+@section('js')
+<script src="{{ asset('js/update_status.js') }}"></script>
+@endsection
 @endsection
