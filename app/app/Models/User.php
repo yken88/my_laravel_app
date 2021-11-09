@@ -44,6 +44,11 @@ class User extends Authenticatable
 
     public function todos()
     {
-        return $this->hasMany(Recipe::class);
+        return $this->hasMany(Todo::class);
+    }
+
+    public static function getByBeareToken($token){
+        $user = self::where('token', $token)->first();
+        return $user;
     }
 }

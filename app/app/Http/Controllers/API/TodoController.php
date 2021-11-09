@@ -12,9 +12,13 @@ use Illuminate\Support\Facades\Auth;
 
 class TodoController extends Controller
 {
-    
-    public function updateStatus($id){
-        $this->checkUser($id);
+    public function updateStatus($id, Request $request){
+        $token = $request->bearerToken();
+        $user = User::getByBeareToken($token);
+        if(!$user){
+            redirect(route('todo.index'));
+        }
+
         DB::beginTransaction();
 
         try{
@@ -39,19 +43,6 @@ class TodoController extends Controller
         }
 
         return response()->json($result);
-
-    }
-
-    public function checkUser($id){
-        $token = request()->bearerToken();
-
-        $todo = Todo::find($id);
-        $userToken = User::find($todo->user_id)->token;
-
-
-        if($userToken !== $token){
-            return redirect(route('login'));
-        }
 
     }
 }
