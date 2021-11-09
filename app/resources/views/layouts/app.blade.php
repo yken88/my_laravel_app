@@ -81,6 +81,10 @@
             @yield('content')
         </main>
     </div>
+    {{-- 追加 userInfoとしてtoken付与 --}}
+    <script>
+        window.userInfo = {!! json_encode(['token' => \Auth::user()->token ?? null]) !!};
+    </script>
     @yield('js')
 </body>
 </html>

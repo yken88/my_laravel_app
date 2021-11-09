@@ -1,7 +1,7 @@
 $(function() {
     $('.todo-checkbox').click(function() {
         var id = $(this).data('id');
-        var token = $(this).data('token');
+        var token = window.userInfo;
 
         $.ajax({
             headers: {
@@ -17,8 +17,8 @@ $(function() {
                 if(res == 'success'){
                     console.log('success');
                 }else{
-                    alert(res);
-                    console.log('DB error');
+                    alert('DB error');
+                    console.log(res);
                 }
             },
             error: function() {

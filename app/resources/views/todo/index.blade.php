@@ -9,7 +9,7 @@
                     <div class="card">
                         <div class="card-header">
                             <label>
-                                <input type="checkbox" class="todo-checkbox" data-token="{{ $token }}" data-id="{{ $todo['id'] }}" @if ($todo['status'])checked @endif>
+                                <input type="checkbox" class="todo-checkbox" data-id="{{ $todo['id'] }}" @if ($todo['status'])checked @endif>
                             </label>
                             {{ ($todo['title']) }}
                         </div>
