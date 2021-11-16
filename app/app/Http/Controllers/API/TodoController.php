@@ -12,12 +12,18 @@ use Illuminate\Support\Facades\Auth;
 
 class TodoController extends Controller
 {
-    public function updateStatus($id, Request $request){
+    private function checkUser(){
+        $request = new Request;
         $token = $request->bearerToken();
         $user = User::getByBeareToken($token);
         if(!$user){
             redirect(route('todo.index'));
         }
+    }
+
+    public function updateStatus($id){
+        
+        $this->checkUser();
 
         DB::beginTransaction();
 
@@ -44,5 +50,27 @@ class TodoController extends Controller
 
         return response()->json($result);
 
+    }
+
+    public function delete($id){
+        $response = [];
+        $this->checkUser();
+
+        DB::beginTransaction();
+
+        try{
+            $todo = Todo::find($id);
+            $todo->delete();
+            DB::commit();
+            $response['result'] = 'success';
+
+        }catch(\Exception $e){
+            Log::error($e->getMessage());
+            DB::rollback();
+            
+            $response['result'] = $e->getMessage();
+        }
+        
+        return response()->json($response);
     }
 }

@@ -21,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/status/{id}', [TodoController::class, 'updateStatus'])->name('todo.status');
+Route::post('/delete/{id}', [TodoController::class, 'delete'])->name('todo.delete');
