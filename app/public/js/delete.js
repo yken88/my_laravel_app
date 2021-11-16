@@ -1,28 +1,27 @@
 $(function() {
-    $('.todo-checkbox').click(function() {
+    $('.todo-delete').click(function() {
         var id = $(this).data('id');
         var token = window.userInfo;
-
+        var res = {};
         $.ajax({
             headers: {
                 // csrf対策
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                 Authorization: 'Bearer '+ token
             },
-            url: '/api/status/' + id, 
+            url: '/api/delete/' + id, 
             type: 'POST',
-            id: id,
+            res: res,
             success: function(res) {
-                //成功
-                if(res == 'success'){
-                    console.log('status updated');
+                if(res.result == 'success'){
+                    window.location.href = "/todo";
+
                 }else{
                     alert('DB error');
                     console.log(res);
                 }
             },
             error: function() {
-                //失敗
                 alert("ajax failed");
                 console.log('ajax failed');
 

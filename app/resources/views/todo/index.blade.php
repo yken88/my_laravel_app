@@ -22,10 +22,10 @@
                                 <div class="mr-3">
                                     <a href="{{ route('todo.show', $todo['id'])}}" class="btn btn-outline-primary">詳細</a>
                                 </div>
-                                <form action="{{ route('todo.delete', $todo['id'])}}" method="post">
-                                    @csrf
-                                    <input type="submit" class="btn btn-outline-secondary" value="削除">
-                                </form>
+
+                                <label>
+                                    <button class="todo-delete" data-id="{{ $todo['id'] }}"> 削除</a>
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -37,5 +37,6 @@
 
 @section('js')
 <script src="{{ asset('js/update_status.js') }}"></script>
+<script src="{{ asset('js/delete.js') }}"></script>
 @endsection
 @endsection
