@@ -4,6 +4,14 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <form action="{{ route('todo.index')}}" method="GET">
+                <div class="d-flex justify-content-center align-items-center">
+                    <input class="mr-3" type="checkbox" name="status" value="1">
+                    <input type="text" class="col-md-6 form-control mr-2" name="title" value="{{ old('title') }}" autofocus>
+                    <input type="submit" class="btn btn-info text-light" value="検索">
+                </div>
+            </form>
+            <br>
             <a href="{{ route('todo.create') }}" class="btn btn-primary mb-3">新規作成</a>
                 @foreach ($todo_list as $todo)
                     <div class="card">
@@ -24,7 +32,7 @@
                                 </div>
 
                                 <label>
-                                    <button class="todo-delete" data-id="{{ $todo['id'] }}"> 削除</a>
+                                    <button class="todo-delete btn btn-secondary" data-id="{{ $todo['id'] }}"> 削除</a>
                                 </label>
                             </div>
                         </div>
