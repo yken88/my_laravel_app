@@ -11,8 +11,13 @@ use Illuminate\Support\Facades\DB;
 
 class TodoController extends Controller
 {
-    public function index(){
-        $todo_list = Todo::where('user_id', Auth::id())->get()->toArray();
+    public function index(Request $request){
+        if($request->title || $request->status){
+            $todo_list = $this->searchTask($request->title, $request->status);
+        }else{
+            $todo_list = Todo::where('user_id', Auth::id())->get()->toArray();
+        }
+
         $token = Auth::user()->token;
         
         return view('todo.index', [
@@ -20,6 +25,30 @@ class TodoController extends Controller
             'token' => $token
         ]);
     }
+
+    // 検索
+    private function searchTask($title, $status){
+
+        // statusの指定がなかった場合
+        if($status === null){
+            // 未完了を指定
+            $status = Todo::INCOMPLETE;
+        }
+
+        if($title === null){
+            $todo_list = Todo::where('user_id', Auth::id())
+                    ->where('status', $status)
+                    ->get(); 
+        }else{
+            $todo_list = Todo::where('user_id', Auth::id())
+                    ->where('title', 'like', "%$title%")
+                    ->where('status', $status)
+                    ->get();
+        }
+
+        return $todo_list;
+    }
+
 
     public function show($id){
         $todo = Todo::find($id);
